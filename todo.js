@@ -32,7 +32,7 @@ function fetchTodos() {
             todoList.innerHTML = '';
             todos.forEach(todo => {
                 const li = document.createElement('li');
-                li.textContent = todo;
+                li.textContent = todo.title;
                 todoList.appendChild(li);
             });
         });
