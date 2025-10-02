@@ -20,3 +20,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 
+echo json_encode($todos);
