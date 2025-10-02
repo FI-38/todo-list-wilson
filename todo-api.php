@@ -1,4 +1,5 @@
 <?php
+
 header('Content-Type: application/json');
 
 // Read current todos in json file
@@ -10,14 +11,23 @@ if (file_exists($file)) {
     $todos = [];
 }
 
-// Add new entry to json file
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $data = file_get_contents('php://input');
-    $input = json_decode($data, true);
-    $todos[] = $input['todo'];
-    file_put_contents($file, json_encode($todos));
-    echo json_encode(['status' => 'success']);
-    exit;
+switch ($_SERVER['REQUEST_METHOD']) {
+    case 'GET':
+        // Return all todos as JSON string
+        echo json_encode($todos);
+        break;
+    case 'POST':
+        // Add new entry to json file
+        $data = file_get_contents('php://input');
+        $input = json_decode($data, true);
+        $todos[] = $input['todo'];
+        file_put_contents($file, json_encode($todos));
+        echo json_encode(['status' => 'success']);
+        break;
+    case 'PUT':
+        // Placeholder for updating a TODO
+        break;
+    case 'DELETE':
+        // Placeholder for deleting a TODO
+        break;
 }
-
-echo json_encode($todos);
