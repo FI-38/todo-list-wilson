@@ -14,8 +14,31 @@ const showMessage = (message) => {
     }, 3000);
 };
 
-document.getElementById('todoForm').addEventListener('submit', function (e) {
+const getDeleteButton = (item) => {
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Löschen';
 
+    // Handle delete button click
+    deleteButton.addEventListener('click', function() {
+        console.log(`Delete ${item.title}`)
+        fetch(apiUrl, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id: item.id })
+        })
+        .then(response => response.json())
+        .then(() => {
+            fetchTodos(); // Reload todo list
+        });
+    });
+
+    return deleteButton;
+}
+
+document.getElementById('todoForm').addEventListener('submit', function (e) {
+    // Don't do the default submit action, like send the request.
     e.preventDefault();
 
     const todoInput = document.getElementById('todoInput').value;
@@ -23,7 +46,6 @@ document.getElementById('todoForm').addEventListener('submit', function (e) {
     // Input validation: check if todo is empty or only whitespace
     if (!todoInput || todoInput.trim() === '') {
         showMessage('Bitte geben Sie einen Namen für das TODO an! (Client-Validierung)');
-
         // Stop execution if validation fails
         return;
     }
@@ -57,6 +79,7 @@ function fetchTodos() {
             todos.forEach(todo => {
                 const li = document.createElement('li');
                 li.textContent = todo.title;
+                li.appendChild(getDeleteButton(todo));
                 todoList.appendChild(li);
             });
         });
