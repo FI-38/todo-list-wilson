@@ -36,7 +36,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
             http_response_code(400);
             echo json_encode([
                 'status' => 'error',
-                'message' => 'TODO-Text darf nicht leer sein!'
+                'message' => 'TODO-Text darf nicht leer sein! (Server Validierung)'
             ]);
             write_log('POST_ERROR', 'Empty or whitespace-only todo');
             break;
