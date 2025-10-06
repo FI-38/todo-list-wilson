@@ -39,7 +39,12 @@ const getDeleteButton = (item) => {
 
 const getCompletedButton = (item) => {
     const deleteButton = document.createElement('button');
-    deleteButton.textContent = 'Erledigt';
+
+    if (item.completed) {
+        deleteButton.textContent = 'Unerledigt';
+    } else {
+        deleteButton.textContent = 'Erledigt';
+    }
 
     // Handle delete button click
     deleteButton.addEventListener('click', function() {
@@ -49,7 +54,7 @@ const getCompletedButton = (item) => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ id: item.id, completed: true })
+            body: JSON.stringify({ id: item.id, completed: !item.completed })
         })
         .then(response => response.json())
         .then(() => {
