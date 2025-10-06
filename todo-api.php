@@ -42,7 +42,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
             break;
         }
 
-        $new_todo = ["id" => uniqid(), "title" => $input['todo']];
+        $new_todo = ["id" => uniqid(), "title" => $input['todo'], "completed" => false];
         $todos[] = $new_todo;
         file_put_contents($file, json_encode($todos));
         echo json_encode(['status' => 'success']);
