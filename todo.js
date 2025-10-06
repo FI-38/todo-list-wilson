@@ -38,19 +38,19 @@ const getDeleteButton = (item) => {
 }
 
 const getCompletedButton = (item) => {
-    const deleteButton = document.createElement('button');
+    const completeButton = document.createElement('button');
 
     if (item.completed) {
-        deleteButton.textContent = 'Unerledigt';
+        completeButton.textContent = 'Unerledigt';
     } else {
-        deleteButton.textContent = 'Erledigt';
+        completeButton.textContent = 'Erledigt';
     }
 
     // Handle delete button click
-    deleteButton.addEventListener('click', function() {
+    completeButton.addEventListener('click', function() {
         console.log(`Delete ${item.title}`)
         fetch(apiUrl, {
-            method: 'PUT',
+            method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -62,7 +62,7 @@ const getCompletedButton = (item) => {
         });
     });
 
-    return deleteButton;
+    return completeButton;
 }
 
 document.getElementById('todoForm').addEventListener('submit', function (e) {

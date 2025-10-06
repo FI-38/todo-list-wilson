@@ -48,7 +48,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         echo json_encode(['status' => 'success']);
         write_log('POST', $input['todo']);
         break;
-    case 'PUT':
+    case 'PATCH':
         $data = json_decode(file_get_contents('php://input'), true);
 
         foreach ($todos as $index => $todo) {
