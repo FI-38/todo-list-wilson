@@ -49,7 +49,18 @@ switch ($_SERVER['REQUEST_METHOD']) {
         write_log('POST', $input['todo']);
         break;
     case 'PUT':
-        // Placeholder for updating a TODO
+        $data = json_decode(file_get_contents('php://input'), true);
+
+        foreach ($todos as $index => $todo) {
+            if ($todo['id'] == $data['id']) {
+                // $todo holds only a copy, but we need to change the array itself
+                $todos[$index]['completed'] = $data['completed'];
+                break;
+            }
+        }
+
+        file_put_contents($file, json_encode($todos));
+        echo json_encode(['status' => 'success']);
         break;
     case 'DELETE':
         // Get data from the input stream.

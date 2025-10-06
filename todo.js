@@ -37,6 +37,29 @@ const getDeleteButton = (item) => {
     return deleteButton;
 }
 
+const getCompletedButton = (item) => {
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Erledigt';
+
+    // Handle delete button click
+    deleteButton.addEventListener('click', function() {
+        console.log(`Delete ${item.title}`)
+        fetch(apiUrl, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id: item.id, completed: true })
+        })
+        .then(response => response.json())
+        .then(() => {
+            fetchTodos(); // Reload todo list
+        });
+    });
+
+    return deleteButton;
+}
+
 document.getElementById('todoForm').addEventListener('submit', function (e) {
     // Don't do the default submit action, like send the request.
     e.preventDefault();
@@ -79,6 +102,10 @@ function fetchTodos() {
             todos.forEach(todo => {
                 const li = document.createElement('li');
                 li.textContent = todo.title;
+                if (todo.completed) {
+                    li.style.textDecoration = 'line-through';
+                }
+                li.appendChild(getCompletedButton(todo));
                 li.appendChild(getDeleteButton(todo));
                 todoList.appendChild(li);
             });
