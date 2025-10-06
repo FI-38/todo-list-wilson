@@ -29,6 +29,19 @@ switch ($_SERVER['REQUEST_METHOD']) {
         // Add new entry to json file
         $data = file_get_contents('php://input');
         $input = json_decode($data, true);
+
+        // Backend validation: check if todo is empty or only whitespace
+        if (!isset($input['todo']) || empty(trim($input['todo']))) {
+            // Return error response for invalid input
+            http_response_code(400);
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'TODO-Text darf nicht leer sein!'
+            ]);
+            write_log('POST_ERROR', 'Empty or whitespace-only todo');
+            break;
+        }
+
         $new_todo = ["id" => uniqid(), "title" => $input['todo']];
         $todos[] = $new_todo;
         file_put_contents($file, json_encode($todos));
