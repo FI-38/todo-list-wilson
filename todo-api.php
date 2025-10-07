@@ -2,13 +2,7 @@
 
 header('Content-Type: application/json');
 
-// LOG function in PHP
-function write_log($action, $data) {
-    $log = fopen('log.txt', 'a');
-    $timestamp = date('Y-m-d H:i:s');
-    fwrite($log, "$timestamp - $action: " . json_encode($data) . "\n");
-    fclose($log);
-}
+require_once('helper.php');
 
 // Read current todos in json file
 $file = 'todo.json';
@@ -30,17 +24,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         $data = file_get_contents('php://input');
         $input = json_decode($data, true);
 
-        // Backend validation: check if todo is empty or only whitespace
-        if (!isset($input['todo']) || empty(trim($input['todo']))) {
-            // Return error response for invalid input
-            http_response_code(400);
-            echo json_encode([
-                'status' => 'error',
-                'message' => 'TODO-Text darf nicht leer sein! (Server Validierung)'
-            ]);
-            write_log('POST_ERROR', 'Empty or whitespace-only todo');
-            break;
-        }
+        validate_input($input, 'todo');
 
         $new_todo = ["id" => uniqid(), "title" => $input['todo'], "completed" => false];
         $todos[] = $new_todo;
