@@ -4,6 +4,27 @@ header('Content-Type: application/json');
 
 require_once('helper.php');
 
+$host = '127.0.0.1';
+$db = 'todo_list';
+// Its very bad to have credentials in git!
+$user = 'j23d';
+$pass = 'beep';
+$charset = 'utf8mb4';
+
+$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+$options = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+];
+
+try {
+    $pdo = new PDO($dsn, $user, $pass, $options);
+    write_log("PDO", "Successful created pdo object.");
+} catch (\PDOException $e) {
+    write_log("PDOException", $e->getMessage() . " in "
+              . $e->getFile() . " on line " . $e->getLine());
+}
+
 // Read current todos in json file
 $file = 'todo.json';
 if (file_exists($file)) {
@@ -16,7 +37,10 @@ if (file_exists($file)) {
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
         // Return all todos as JSON string
-        echo json_encode($todos);
+        // echo json_encode($todos);
+        $statement = $pdo->query("SELECT * FROM todo");
+        $todo_items = $statement->fetchAll();
+        echo json_encode($todo_items);
         write_log('GET', $todos);
         break;
     case 'POST':
