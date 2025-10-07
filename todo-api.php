@@ -32,6 +32,26 @@ switch ($_SERVER['REQUEST_METHOD']) {
         echo json_encode(['status' => 'success']);
         write_log('POST', $input['todo']);
         break;
+    case 'PUT':
+        // Add new entry to json file
+        $data = file_get_contents('php://input');
+        $input = json_decode($data, true);
+
+        validate_input($input, 'title');
+        validate_input($input, 'id');
+
+        foreach ($todos as $index => $todo) {
+            if ($todo['id'] == $input['id']) {
+                // $todo holds only a copy, but we need to change the array itself
+                $todos[$index]['title'] = $input['title'];
+                break;
+            }
+        }
+
+        file_put_contents($file, json_encode($todos));
+        echo json_encode(['status' => 'success']);
+        write_log('PUT', $input['title']);
+        break;
     case 'PATCH':
         $data = json_decode(file_get_contents('php://input'), true);
 

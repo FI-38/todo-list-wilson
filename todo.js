@@ -65,6 +65,48 @@ const getCompletedButton = (item) => {
     return completeButton;
 }
 
+const getUpdateButton = (item) => {
+    const updateButton = document.createElement('button');
+    updateButton.textContent = 'Update';
+
+    updateButton.addEventListener('click', function() {
+        console.log("update");
+        document.getElementById('todo-update-id').value = item.id;
+        document.getElementById('todo-update-input').value = item.title;
+        document.getElementById('todo-update-form').style.display = 'block';
+    });
+
+    return updateButton;
+}
+
+document.getElementById('todo-update-form').addEventListener('submit', function (e) {
+    // Don't do the default submit action, like send the request.
+    e.preventDefault();
+
+    const todoId = document.getElementById('todo-update-id').value;
+    const todoInput = document.getElementById('todo-update-input').value;
+
+    fetch(apiUrl, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id: todoId, title: todoInput }),
+    })
+    .then(response => response.json())
+    .then((data) => {
+        // Handle backend validation errors
+        if (data.status === 'error') {
+            showMessage(data.message);
+        } else {
+            fetchTodos();
+                document.getElementById('todo-update-id').value = '';
+                document.getElementById('todo-update-input').value = '';
+                document.getElementById('todo-update-form').style.display = 'none';
+        }
+    });
+});
+
 document.getElementById('todoForm').addEventListener('submit', function (e) {
     // Don't do the default submit action, like send the request.
     e.preventDefault();
@@ -111,6 +153,7 @@ function fetchTodos() {
                     li.style.textDecoration = 'line-through';
                 }
                 li.appendChild(getCompletedButton(todo));
+                li.appendChild(getUpdateButton(todo));
                 li.appendChild(getDeleteButton(todo));
                 todoList.appendChild(li);
             });
