@@ -4,7 +4,11 @@ header('Content-Type: application/json');
 
 require_once('helper.php');
 require_once('credentials.php');
+
 require_once('./classes/TodoDB.php');
+
+$todoDb = new TodoDB();
+write_log("INFO", $todoDb);
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 $options = [
@@ -23,8 +27,7 @@ try {
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
         // Return all todos as JSON string
-        $statement = $pdo->query("SELECT * FROM todo");
-        $todo_items = $statement->fetchAll();
+        $todo_items = $todoDb->getTodos();
         echo json_encode($todo_items);
         write_log('GET', $todo_items);
         break;

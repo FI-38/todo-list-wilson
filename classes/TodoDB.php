@@ -1,5 +1,7 @@
 <?php
 
+require_once('credentials.php');
+
 /**
  * Database handling for the todos in the FI38 demo project.
  *
@@ -49,6 +51,11 @@ class TodoDB {
         } catch(Exception $e) {
             error_log($e->getMessage());
         }
+    }
+
+    public function getTodos() {
+        $sql = "SELECT * FROM todo ORDER BY id DESC";
+        return $this->prepareExecuteStatement($sql)->fetchAll();
     }
 
 }
