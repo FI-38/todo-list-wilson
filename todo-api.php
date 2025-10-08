@@ -74,15 +74,10 @@ switch ($_SERVER['REQUEST_METHOD']) {
     case 'PATCH':
         $data = json_decode(file_get_contents('php://input'), true);
 
-        foreach ($todos as $index => $todo) {
-            if ($todo['id'] == $data['id']) {
-                // $todo holds only a copy, but we need to change the array itself
-                $todos[$index]['completed'] = $data['completed'];
-                break;
-            }
-        }
+        // Update the completion status of our todo in the database.
+        $statement = $pdo->prepare("UPDATE todo SET completed = :completed WHERE id = :id");
+        $statement->execute(['id' => $data['id'], 'completed' => (int)$data['completed']]);
 
-        file_put_contents($file, json_encode($todos));
         echo json_encode(['status' => 'success']);
         break;
     case 'DELETE':
