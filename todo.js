@@ -46,9 +46,9 @@ const getCompletedButton = (item) => {
         completeButton.textContent = 'Erledigt';
     }
 
-    // Handle delete button click
+    // Handle complete button click
     completeButton.addEventListener('click', function() {
-        console.log(`Delete ${item.title}`)
+        console.log(`complete / uncomplete ${item.title}`)
         fetch(apiUrl, {
             method: 'PATCH',
             headers: {
