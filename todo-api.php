@@ -3,13 +3,7 @@
 header('Content-Type: application/json');
 
 require_once('helper.php');
-
-$host = '127.0.0.1';
-$db = 'todo_list';
-// Its very bad to have credentials in git!
-$user = 'j23d';
-$pass = 'beep';
-$charset = 'utf8mb4';
+require_once('credentials.php');
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 $options = [
