@@ -59,15 +59,13 @@ switch ($_SERVER['REQUEST_METHOD']) {
         validate_input($input, 'title');
         validate_input($input, 'id');
 
-        foreach ($todos as $index => $todo) {
-            if ($todo['id'] == $input['id']) {
-                // $todo holds only a copy, but we need to change the array itself
-                $todos[$index]['title'] = $input['title'];
-                break;
-            }
-        }
+        // Update todo with a new title in our dabase.
+        $statement = $pdo->prepare("UPDATE todo SET title = :title, completed = :completed WHERE id = :id");
+        $statement->execute(['id' => $input['id'],
+                     'title' => $input['title'],
+                     'completed' => 0
+                    ]);
 
-        file_put_contents($file, json_encode($todos));
         echo json_encode(['status' => 'success']);
         write_log('PUT', $input['title']);
         break;
