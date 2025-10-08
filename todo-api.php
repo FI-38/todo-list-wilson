@@ -4,6 +4,7 @@ header('Content-Type: application/json');
 
 require_once('helper.php');
 require_once('credentials.php');
+require_once('./classes/TodoDB.php');
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 $options = [

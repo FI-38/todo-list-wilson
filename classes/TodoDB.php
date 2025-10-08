@@ -1,0 +1,54 @@
+<?php
+
+/**
+ * Database handling for the todos in the FI38 demo project.
+ *
+ * All database functionality is defined here.
+ *
+ * @author  US-FI38 <post@fi38-coding.com>
+ * @property object $connection PDO connection to the MariaDB
+ * @property object $stmt Database statement handler object.
+ * @throws
+ * @since 1.0
+ */
+class TodoDB {
+    private $connection;
+    private $stmt;
+
+
+    /**
+     * Contructructor of the TodoDB class.
+     */
+    public function __construct() {
+        global $host, $db, $user, $pass;
+        try {
+            $this->connection = new PDO(
+                "mysql:host=$host;dbname=$db;",
+                $user,
+                $pass
+            );
+            $this->connection->setAttribute(
+                PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+        }
+    }
+
+    /**
+     * Prepare and execute the given sql statement.
+     *
+     * @param string $sql The sql statement.
+     * @param array $params An array of the needed parameters.
+     * @return object $stmt The excecuted statement.
+     */
+    private function prepareExecuteStatement($sql, $params = []) {
+        try {
+            $stmt = $this->connection->prepare($sql);
+            $stmt->execute($params);
+            return $stmt;
+        } catch(Exception $e) {
+            error_log($e->getMessage());
+        }
+    }
+
+}
