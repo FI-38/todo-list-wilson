@@ -58,4 +58,24 @@ class TodoDB {
         return $this->prepareExecuteStatement($sql)->fetchAll();
     }
 
+    public function createTodo($title) {
+        write_log("info", $title);
+        $sql = "INSERT INTO todo (title) VALUES (:title)";
+        return $this->prepareExecuteStatement($sql, ["title" => $title]);
+    }
+
+    public function deleteTodo($id) {
+        $sql = "DELETE FROM todo WHERE id = ?";
+        return $this->prepareExecuteStatement($sql, [$id]);
+    }
+
+    public function completeTodo($id, $completed) {
+        $sql = "UPDATE todo SET completed = ? WHERE id = ?";
+        return $this->prepareExecuteStatement($sql, [(int)$completed, $id]);
+    }
+
+    public function updateTodo($id, $title) {
+        $sql = "UPDATE todo SET title = ?, completed = ? WHERE id = ?";
+        return $this->prepareExecuteStatement($sql, [$title, 0, $id]);
+    }
 }

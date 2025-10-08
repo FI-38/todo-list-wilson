@@ -40,8 +40,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         validate_input($input, 'todo');
 
         // Insert the todo into our database.
-        $statement = $pdo->prepare("INSERT INTO todo (title, completed) VALUES (:title, :completed)");
-        $statement->execute(['title' => $input['todo'], 'completed' => 0]);
+        $todoDb->createTodo($input['todo']);
 
         echo json_encode(['status' => 'success']);
         write_log('POST', $input['todo']);
@@ -60,7 +59,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                      'title' => $input['title'],
                      'completed' => 0
                     ]);
-
+        $todoDb->updateTodo($input['id'], $input['title']);
         echo json_encode(['status' => 'success']);
         write_log('PUT', $input['title']);
         break;
@@ -68,9 +67,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         $data = json_decode(file_get_contents('php://input'), true);
 
         // Update the completion status of our todo in the database.
-        $statement = $pdo->prepare("UPDATE todo SET completed = :completed WHERE id = :id");
-        $statement->execute(['id' => $data['id'], 'completed' => (int)$data['completed']]);
-
+        $todoDb->completeTodo($data['id'], $data['completed']);
         echo json_encode(['status' => 'success']);
         break;
     case 'DELETE':
@@ -78,8 +75,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         $data = json_decode(file_get_contents('php://input'), true);
 
         // Delete the todo from our database.
-        $statement = $pdo->prepare("DELETE FROM todo WHERE id=:id");
-        $statement->execute(['id' => $data['id']]);
+        $todoDb->deleteTodo($data['id']);
 
         // Tell the client the success of the operation.
         echo json_encode(['status' => 'success']);
