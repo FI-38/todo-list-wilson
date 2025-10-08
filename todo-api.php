@@ -19,22 +19,13 @@ try {
               . $e->getFile() . " on line " . $e->getLine());
 }
 
-// Read current todos in json file
-$file = 'todo.json';
-if (file_exists($file)) {
-    $json_data = file_get_contents($file);
-    $todos = json_decode($json_data, true);
-} else {
-    $todos = [];
-}
-
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
         // Return all todos as JSON string
         $statement = $pdo->query("SELECT * FROM todo");
         $todo_items = $statement->fetchAll();
         echo json_encode($todo_items);
-        write_log('GET', $todos);
+        write_log('GET', $todo_items);
         break;
     case 'POST':
         // Add new entry to json file
