@@ -31,7 +31,6 @@ if (file_exists($file)) {
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
         // Return all todos as JSON string
-        // echo json_encode($todos);
         $statement = $pdo->query("SELECT * FROM todo");
         $todo_items = $statement->fetchAll();
         echo json_encode($todo_items);
@@ -42,11 +41,13 @@ switch ($_SERVER['REQUEST_METHOD']) {
         $data = file_get_contents('php://input');
         $input = json_decode($data, true);
 
+        // Validate the given todo.
         validate_input($input, 'todo');
 
-        $new_todo = ["id" => uniqid(), "title" => $input['todo'], "completed" => false];
-        $todos[] = $new_todo;
-        file_put_contents($file, json_encode($todos));
+        // Insert the todo into our database.
+        $statement = $pdo->prepare("INSERT INTO todo (title, completed) VALUES (:title, :completed)");
+        $statement->execute(['title' => $input['todo'], 'completed' => 0]);
+
         echo json_encode(['status' => 'success']);
         write_log('POST', $input['todo']);
         break;
