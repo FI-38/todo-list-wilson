@@ -1,5 +1,7 @@
 todo.json
 log.txt
 
-# composer package directory
+# composer packages
+.phpdoc
 vendor/
+docs/
