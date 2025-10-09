@@ -1,2 +1,5 @@
 todo.json
 log.txt
+
+# composer package directory
+vendor/
