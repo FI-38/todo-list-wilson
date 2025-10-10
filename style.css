@@ -7,20 +7,49 @@ body {
 h1 {
   font-size: 50px;
   letter-spacing: 10px;
-  color: darkblue;
+  color: darkred !important;
+  background-color: antiquewhite !important;
+}
+
+h1 {
+    width: 500px;
+    height: 100px;
+    padding: 50px 30px 100px 10px;
+    border: 2px solid #333;
+    border-radius: 10px;
+    margin: 0 auto;
+}
+
+.headline {
+    color: darkblue;
 }
 
 #todoList {
     width: 100%;
 }
 
-.todo-item {
+#todoList .todo-item {
     font-family: Arial, serif;
     font-size: 16px;
     color: #666;
     font-weight: bolder;
     width: 600px;
     text-align: right;
+    padding: 15px;
+    margin: 10px 0;
+    border: 2px solid #ccc
+}
+
+#todoList .todo-item:nth-child(even) {
+    background-color: beige;
+}
+
+#todoList .todo-item:first-child {
+    border: 2px green dashed;
+}
+
+#todoList .todo-item:hover {
+    background-color: burlywood;
 }
 
 .completed {
@@ -44,8 +73,16 @@ li {
 button {
     margin-left: 20px;
     background-color: cadetblue;
-    color: lightskyblue;
+    color: darkgreen;
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
 
+button:hover {
+    background-color: aliceblue;
+    color: #666;
+    cursor: crosshair;
 }
 
 #message {
