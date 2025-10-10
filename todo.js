@@ -149,8 +149,9 @@ function fetchTodos() {
             todos.forEach(todo => {
                 const li = document.createElement('li');
                 li.textContent = todo.title;
+                li.className = "todo-item";
                 if (todo.completed) {
-                    li.style.textDecoration = 'line-through';
+                    li.className = 'todo-item completed';
                 }
                 li.appendChild(getCompletedButton(todo));
                 li.appendChild(getUpdateButton(todo));

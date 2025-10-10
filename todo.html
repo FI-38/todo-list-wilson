@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="todo.js" defer></script>
     <title>Todo Liste</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Todo - Liste</h1>
 
-    <div id="message" style="color: red; margin: 20px 0; display: block; visibility: hidden;"></div>
+    <div id="message"></div>
 
-    <form id="todoForm">
+    <form id="todoForm" class="todo-item">
         <input type="text" id="todoInput" placeholder="Neuer Eintrag">
         <button type="submit">Hinzufügen</button>
     </form>

@@ -1,0 +1,57 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+h1 {
+  font-size: 50px;
+  letter-spacing: 10px;
+  color: darkblue;
+}
+
+#todoList {
+    width: 100%;
+}
+
+.todo-item {
+    font-family: Arial, serif;
+    font-size: 16px;
+    color: #666;
+    font-weight: bolder;
+    width: 600px;
+    text-align: right;
+}
+
+.completed {
+  text-decoration: line-through;
+}
+
+input[type="text"] {
+  border: 3px solid black;
+  background-color: beige;
+}
+
+/* Pseudoklasse */
+li:hover {
+  background-color: lightgray;
+}
+
+li {
+    list-style-type: none;
+}
+
+button {
+    margin-left: 20px;
+    background-color: cadetblue;
+    color: lightskyblue;
+
+}
+
+#message {
+    color: darkmagenta;
+    background-color: aquamarine;
+    margin: 20px 0;
+    display: block;
+    visibility: hidden;
+}
