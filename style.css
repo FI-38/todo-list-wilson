@@ -122,3 +122,10 @@ button:hover {
 #todo-update-form {
     display: none;
 }
+
+#todoList {
+		margin: 0 100px;
+		height: 70vh;
+		border: 1px solid red;
+		overflow: auto;
+}
