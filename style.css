@@ -1,7 +1,19 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: Arial, Helvetica, sans-serif;
     background-color: #f0f0f0;
     color: #333;
+}
+
+.container {
+    width: 1000px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
 }
 
 h1 {
@@ -14,38 +26,46 @@ h1 {
 h1 {
     width: 500px;
     height: 100px;
-    padding: 50px 30px 100px 10px;
+    padding: 10px 30px;
     border: 2px solid #333;
     border-radius: 10px;
     margin: 0 auto;
+
 }
 
 .headline {
     color: darkblue;
 }
 
-#todoList {
-    width: 100%;
-}
-
-#todoList .todo-item {
-    font-family: Arial, serif;
-    font-size: 16px;
-    color: #666;
-    font-weight: bolder;
+.todo-item {
     width: 600px;
-    text-align: right;
     padding: 15px;
     margin: 10px 0;
-    border: 2px solid #ccc
+    border: 2px solid #ccc;
+    background-color: #f9f9f9;
+}
+
+.todo-content {
+    display: inline-block;
+    width: 49%;
+}
+
+.todo-actions {
+    display: inline-block;
+    width: 49%;
+    text-align: right;
+}
+
+.todo-actions button {
+    margin-left: 5px;
+}
+
+#todoList {
+    margin: 0 100px;
 }
 
 #todoList .todo-item:nth-child(even) {
     background-color: beige;
-}
-
-#todoList .todo-item:first-child {
-    border: 2px green dashed;
 }
 
 #todoList .todo-item:hover {
@@ -91,4 +111,14 @@ button:hover {
     margin: 20px 0;
     display: block;
     visibility: hidden;
+}
+
+.todo-form {
+    border: 2px solid grey;
+    margin: 0 100px;
+    padding: 10px 30px 10px 50px;
+}
+
+#todo-update-form {
+    display: none;
 }

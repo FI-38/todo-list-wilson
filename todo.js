@@ -148,14 +148,26 @@ function fetchTodos() {
             todoList.innerHTML = '';
             todos.forEach(todo => {
                 const li = document.createElement('li');
-                li.textContent = todo.title;
                 li.className = "todo-item";
+
                 if (todo.completed) {
                     li.className = 'todo-item completed';
                 }
-                li.appendChild(getCompletedButton(todo));
-                li.appendChild(getUpdateButton(todo));
-                li.appendChild(getDeleteButton(todo));
+
+                const contentDiv = document.createElement('div');
+                contentDiv.className = 'todo-content';
+                contentDiv.textContent = todo.title;
+
+                const actionsDiv = document.createElement('div');
+                actionsDiv.className = 'todo-actions';
+
+                actionsDiv.appendChild(getCompletedButton(todo));
+                actionsDiv.appendChild(getUpdateButton(todo));
+                actionsDiv.appendChild(getDeleteButton(todo));
+
+                li.appendChild(contentDiv);
+                li.appendChild(actionsDiv);
+
                 todoList.appendChild(li);
             });
         });

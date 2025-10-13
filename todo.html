@@ -8,22 +8,24 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1 class="headline" style="background-color: aqua;">Todo - Liste</h1>
+    <div class="container">
+        <h1 class="headline">Todo - Liste</h1>
 
-    <div id="message"></div>
+        <div id="message"></div>
 
-    <form id="todoForm" class="todo-item">
-        <input type="text" id="todoInput" placeholder="Neuer Eintrag">
-        <button type="submit">Hinzufügen</button>
-    </form>
+        <form id="todoForm" class="todo-form">
+            <input type="text" id="todoInput" placeholder="Neuer Eintrag">
+            <button type="submit">Hinzufügen</button>
+        </form>
 
-    <ul id="todoList"></ul>
+        <ul id="todoList"></ul>
 
-    <form id="todo-update-form" style="display: none;">
-        Update Form:
-        <input type="hidden" id="todo-update-id">
-        <input type="text" id="todo-update-input">
-        <button type="submit">Update</button>
-    </form>
+        <form id="todo-update-form" class="todo-form">
+            Update Form:
+            <input type="hidden" id="todo-update-id">
+            <input type="text" id="todo-update-input">
+            <button type="submit">Update</button>
+        </form>
+    </div>
 </body>
 </html>
