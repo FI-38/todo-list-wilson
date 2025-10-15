@@ -24,20 +24,6 @@ body {
     color: darkblue;
 }
 
-.todo-content {
-    display: inline-block;
-    width: 49%;
-}
-
-.todo-actions {
-    display: inline-block;
-    width: 49%;
-    text-align: right;
-}
-
-.todo-actions button {
-    margin-left: 5px;
-}
 
 
 #message {
