@@ -150,18 +150,20 @@ function fetchTodos() {
             todoList.innerHTML = '';
             todos.forEach(todo => {
                 const li = document.createElement('li');
-                li.className = "todo-item";
+                li.className = "list-group-item list-group-item-primary d-flex justify-content-between align-items-center";
 
-                if (todo.completed) {
-                    li.className = 'todo-item completed';
-                }
 
                 const contentDiv = document.createElement('div');
-                contentDiv.className = 'todo-content';
+                contentDiv.className = 'todo-content flex-grow-1 me-3';
                 contentDiv.textContent = todo.title;
 
+                if (todo.completed) {
+                    li.classList.add('list-group-item-success');
+                    contentDiv.classList.add('text-decoration-line-through');
+                }
+
                 const actionsDiv = document.createElement('div');
-                actionsDiv.className = 'todo-actions';
+                actionsDiv.className = 'todo-actions btn-group';
 
                 actionsDiv.appendChild(getCompletedButton(todo));
                 actionsDiv.appendChild(getUpdateButton(todo));

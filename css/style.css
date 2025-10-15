@@ -20,41 +20,8 @@ body {
     border-radius: 10px;
 }
 
-h1 {
-  font-size: 50px;
-  letter-spacing: 10px;
-  color: darkred !important;
-  background-color: antiquewhite !important;
-}
-
-h1 {
-    width: 500px;
-    height: 100px;
-    padding: 10px 30px;
-    border: 2px solid #333;
-    border-radius: 10px;
-    margin: 0 auto;
-
-}
-
 .headline {
     color: darkblue;
-}
-
-#todoList {
-    margin: 0 100px;
-    height: 70vh;
-    border: 1px solid red;
-}
-
-
-.todo-item {
-    width: 600px;
-    padding: 15px;
-    margin: 10px 0;
-    border: 2px solid #ccc;
-    background-color: #f9f9f9;
-    font-size: 1.5rem;
 }
 
 .todo-content {
@@ -73,88 +40,10 @@ h1 {
 }
 
 
-#todoList .todo-item:nth-child(even) {
-    background-color: beige;
-}
-
-#todoList .todo-item:hover {
-    background-color: burlywood;
-}
-
-.completed {
-  text-decoration: line-through;
-}
-
-input[type="text"] {
-  border: 3px solid black;
-  background-color: beige;
-}
-
-/* Pseudoklasse */
-li:hover {
-  background-color: lightgray;
-}
-
-li {
-    list-style-type: none;
-}
-
-/* button {
-    margin-left: 20px;
-    background-color: cadetblue;
-    color: darkgreen;
-    font-weight: 700;
-    padding: 5px 10px;
-    border-radius: 10px;
-    font-size: 1rem;
-}
-
-button::before {
-    content: ">>";
-}
-
-button:hover {
-    background-color: aliceblue;
-    color: #666;
-    cursor: crosshair;
-} */
-
 #message {
     position: fixed;
     top: 1rem;
     left: 50%;
     transform: translateX(-50%);
     z-index: 10000;
-}
-
-.todo-form {
-    border: 2px solid grey;
-    margin: 0 100px;
-    padding: 10px 30px 10px 50px;
-}
-
-#todo-update-form {
-    display: none;
-}
-
-
-.grid-container {
-    display: grid;
-    grid-template-columns: 1fr 2fr 2fr;
-    gap: 10px;
-}
-.grid-item {
-    background-color: #f44336;
-    padding: 20px;
-    color: white;
-}
-
-.btn-primary {
-    background-color: #6c5ce7;
-    border-color: #6c5ce7;
-}
-
-.btn-primary:hover {
-    background-color: #2200ff;
-    border-color: #bebad9;
 }
