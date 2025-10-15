@@ -3,14 +3,14 @@ console.log("todo.js loaded");
 const apiUrl = 'todo-api.php';
 const messageDiv = document.getElementById('message');
 
-const showMessage = (message) => {
+const showMessage = (message, type='danger') => {
     // Show error message
     messageDiv.textContent = message;
-    messageDiv.style.visibility = 'visible';
+    messageDiv.className = `alert alert-${type}`;
 
     // Hide message after 3 seconds
     setTimeout(() => {
-        messageDiv.style.visibility = 'hidden';
+        messageDiv.classList.add('d-none');
     }, 3000);
 };
 
