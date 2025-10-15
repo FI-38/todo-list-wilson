@@ -16,7 +16,9 @@ const showMessage = (message) => {
 
 const getDeleteButton = (item) => {
     const deleteButton = document.createElement('button');
-    deleteButton.textContent = 'Löschen';
+    const trashIcon = document.createElement('i');
+    trashIcon.className = "bi bi-trash";
+    deleteButton.appendChild(trashIcon);
 
     // Handle delete button click
     deleteButton.addEventListener('click', function() {
