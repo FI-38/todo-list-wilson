@@ -120,8 +120,6 @@ button:hover {
 } */
 
 #message {
-    color: darkmagenta;
-    background-color: aquamarine;
     margin: 20px 0;
     display: block;
     visibility: hidden;
@@ -150,5 +148,11 @@ button:hover {
 }
 
 .btn-primary {
-    background-color: green;
+    background-color: #6c5ce7;
+    border-color: #6c5ce7;
+}
+
+.btn-primary:hover {
+    background-color: #2200ff;
+    border-color: #bebad9;
 }
