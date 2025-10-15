@@ -116,9 +116,9 @@ document.getElementById('todo-update-form').addEventListener('submit', function 
             showMessage(data.message);
         } else {
             fetchTodos();
-                document.getElementById('todo-update-id').value = '';
-                document.getElementById('todo-update-input').value = '';
-                document.getElementById('todo-update-form').style.display = 'none';
+            document.getElementById('todo-update-id').value = '';
+            document.getElementById('todo-update-input').value = '';
+            document.getElementById('todo-update-form').classList.add = 'd-none';
         }
     });
 });

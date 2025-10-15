@@ -54,12 +54,23 @@
 
             <ul id="todoList" class="list-group"></ul>
 
-            <form id="todo-update-form" class="todo-form">
-                Update Form:
-                <input type="hidden" id="todo-update-id">
-                <input type="text" id="todo-update-input">
-                <button type="submit">Update</button>
+            <form id="todo-update-form" class="card d-none mb-4 mt-5">
+                <div class="card-header">
+                    TODO bearbeiten
+                </div>
+                <div class="card-body">
+                    <input type="hidden" id="todo-update-id">
+                    <div class="row g-2">
+                    <div class="col-sm-9">
+                        <input type="text" id="todo-update-input" class="form-control">
+                    </div>
+                    <div class="col-sm-3 d-grid">
+                        <button type="submit" class="btn btn-secondary">Speichern</button>
+                    </div>
+                    </div>
+                </div>
             </form>
+
         </div>
     </main>
     <footer>
