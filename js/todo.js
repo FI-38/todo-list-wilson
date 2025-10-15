@@ -41,12 +41,16 @@ const getDeleteButton = (item) => {
 
 const getCompletedButton = (item) => {
     const completeButton = document.createElement('button');
+    completeButton.type = 'button';
+    completeButton.className = item.completed ? 'btn btn-sm btn-warning' : 'btn btn-sm btn-success';
 
-    if (item.completed) {
-        completeButton.textContent = 'Unerledigt';
-    } else {
-        completeButton.textContent = 'Erledigt';
-    }
+    const icon = document.createElement('i');
+    icon.className = item.completed ? 'bi bi-arrow-counterclockwise' : 'bi bi-check-circle';
+
+    const text = document.createTextNode(item.completed ? ' Zurücksetzen' : ' Erledigt');
+
+    completeButton.appendChild(icon);
+    completeButton.appendChild(text);
 
     // Handle complete button click
     completeButton.addEventListener('click', function() {
@@ -69,13 +73,23 @@ const getCompletedButton = (item) => {
 
 const getUpdateButton = (item) => {
     const updateButton = document.createElement('button');
-    updateButton.textContent = 'Update';
+    updateButton.type = 'button';
+    updateButton.className = 'btn btn-sm btn-secondary';
+
+    const icon = document.createElement('i');
+    icon.className = 'bi bi-pencil-square';
+
+    const text = document.createTextNode(' Bearbeiten');
+
+    updateButton.appendChild(icon);
+    updateButton.appendChild(text);
 
     updateButton.addEventListener('click', function() {
         console.log("update");
         document.getElementById('todo-update-id').value = item.id;
         document.getElementById('todo-update-input').value = item.title;
-        document.getElementById('todo-update-form').style.display = 'block';
+        // document.getElementById('todo-update-form').style.display = 'block';
+        document.getElementById('todo-update-form').classList.remove('d-none');
     });
 
     return updateButton;
@@ -150,7 +164,7 @@ function fetchTodos() {
             todoList.innerHTML = '';
             todos.forEach(todo => {
                 const li = document.createElement('li');
-                li.className = "list-group-item list-group-item-primary d-flex justify-content-between align-items-center";
+                li.className = "list-group-item d-flex justify-content-between align-items-center";
 
 
                 const contentDiv = document.createElement('div');
