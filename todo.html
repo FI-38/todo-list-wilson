@@ -1,31 +1,80 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="todo.js" defer></script>
     <title>Todo Liste</title>
-    <link rel="stylesheet" href="style.css">
+    <link href="img/favicon-32x32.png" rel="icon" type="image/x-icon">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-icons.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="js/bootstrap.bundle.min.js" defer></script>
+    <script src="js/todo.js" defer></script>
 </head>
 <body>
-    <div class="container">
-        <h1 class="headline">Todo - Liste</h1>
+    <header>
+        <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">TODO-App</a>
+                <button class="navbar-toggler" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Liste</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-        <div id="message"></div>
+    <main>
+        <div class="container mt-5">
+            <h1 class="text-center mb-4">Todo - Liste</h1>
 
-        <form id="todoForm" class="todo-form">
-            <input type="text" id="todoInput" placeholder="Neuer Eintrag">
-            <button type="submit">Hinzufügen</button>
-        </form>
+            <div id="message" class="alert alert-danger d-none"></div>
 
-        <ul id="todoList"></ul>
+            <form id="todoForm" class="row g-5 mb-4">
+                <div class="col-sm-9">
+                    <input type="text" id="todoInput" class="form-control" placeholder="Neuer Eintrag">
+                </div>
+                <div class="col-sm-3 d-grid">
+                    <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-plus-circle me-1"></i> Hinzufügen
+                    </button>
+                </div>
+            </form>
 
-        <form id="todo-update-form" class="todo-form">
-            Update Form:
-            <input type="hidden" id="todo-update-id">
-            <input type="text" id="todo-update-input">
-            <button type="submit">Update</button>
-        </form>
-    </div>
+            <ul id="todoList" class="list-group"></ul>
+
+            <form id="todo-update-form" class="card d-none mb-4 mt-5">
+                <div class="card-header">
+                    TODO bearbeiten
+                </div>
+                <div class="card-body">
+                    <input type="hidden" id="todo-update-id">
+                    <div class="row g-2">
+                    <div class="col-sm-9">
+                        <input type="text" id="todo-update-input" class="form-control">
+                    </div>
+                    <div class="col-sm-3 d-grid">
+                        <button type="submit" class="btn btn-secondary">Speichern</button>
+                    </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </main>
+    <footer>
+        Copyright 2025
+    </footer>
 </body>
 </html>

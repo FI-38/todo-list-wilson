@@ -3,20 +3,22 @@ console.log("todo.js loaded");
 const apiUrl = 'todo-api.php';
 const messageDiv = document.getElementById('message');
 
-const showMessage = (message) => {
+const showMessage = (message, type='danger') => {
     // Show error message
     messageDiv.textContent = message;
-    messageDiv.style.visibility = 'visible';
+    messageDiv.className = `alert alert-${type}`;
 
     // Hide message after 3 seconds
     setTimeout(() => {
-        messageDiv.style.visibility = 'hidden';
+        messageDiv.classList.add('d-none');
     }, 3000);
 };
 
 const getDeleteButton = (item) => {
     const deleteButton = document.createElement('button');
-    deleteButton.textContent = 'Löschen';
+    const trashIcon = document.createElement('i');
+    trashIcon.className = "bi bi-trash";
+    deleteButton.appendChild(trashIcon);
 
     // Handle delete button click
     deleteButton.addEventListener('click', function() {
@@ -39,12 +41,16 @@ const getDeleteButton = (item) => {
 
 const getCompletedButton = (item) => {
     const completeButton = document.createElement('button');
+    completeButton.type = 'button';
+    completeButton.className = item.completed ? 'btn btn-sm btn-warning' : 'btn btn-sm btn-success';
 
-    if (item.completed) {
-        completeButton.textContent = 'Unerledigt';
-    } else {
-        completeButton.textContent = 'Erledigt';
-    }
+    const icon = document.createElement('i');
+    icon.className = item.completed ? 'bi bi-arrow-counterclockwise' : 'bi bi-check-circle';
+
+    const text = document.createTextNode(item.completed ? ' Zurücksetzen' : ' Erledigt');
+
+    completeButton.appendChild(icon);
+    completeButton.appendChild(text);
 
     // Handle complete button click
     completeButton.addEventListener('click', function() {
@@ -67,13 +73,23 @@ const getCompletedButton = (item) => {
 
 const getUpdateButton = (item) => {
     const updateButton = document.createElement('button');
-    updateButton.textContent = 'Update';
+    updateButton.type = 'button';
+    updateButton.className = 'btn btn-sm btn-secondary';
+
+    const icon = document.createElement('i');
+    icon.className = 'bi bi-pencil-square';
+
+    const text = document.createTextNode(' Bearbeiten');
+
+    updateButton.appendChild(icon);
+    updateButton.appendChild(text);
 
     updateButton.addEventListener('click', function() {
         console.log("update");
         document.getElementById('todo-update-id').value = item.id;
         document.getElementById('todo-update-input').value = item.title;
-        document.getElementById('todo-update-form').style.display = 'block';
+        // document.getElementById('todo-update-form').style.display = 'block';
+        document.getElementById('todo-update-form').classList.remove('d-none');
     });
 
     return updateButton;
@@ -100,9 +116,9 @@ document.getElementById('todo-update-form').addEventListener('submit', function 
             showMessage(data.message);
         } else {
             fetchTodos();
-                document.getElementById('todo-update-id').value = '';
-                document.getElementById('todo-update-input').value = '';
-                document.getElementById('todo-update-form').style.display = 'none';
+            document.getElementById('todo-update-id').value = '';
+            document.getElementById('todo-update-input').value = '';
+            document.getElementById('todo-update-form').classList.add = 'd-none';
         }
     });
 });
@@ -148,18 +164,20 @@ function fetchTodos() {
             todoList.innerHTML = '';
             todos.forEach(todo => {
                 const li = document.createElement('li');
-                li.className = "todo-item";
+                li.className = "list-group-item d-flex justify-content-between align-items-center";
 
-                if (todo.completed) {
-                    li.className = 'todo-item completed';
-                }
 
                 const contentDiv = document.createElement('div');
-                contentDiv.className = 'todo-content';
+                contentDiv.className = 'todo-content flex-grow-1 me-3';
                 contentDiv.textContent = todo.title;
 
+                if (todo.completed) {
+                    li.classList.add('list-group-item-success');
+                    contentDiv.classList.add('text-decoration-line-through');
+                }
+
                 const actionsDiv = document.createElement('div');
-                actionsDiv.className = 'todo-actions';
+                actionsDiv.className = 'todo-actions btn-group';
 
                 actionsDiv.appendChild(getCompletedButton(todo));
                 actionsDiv.appendChild(getUpdateButton(todo));
